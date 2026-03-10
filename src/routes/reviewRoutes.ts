@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { response, Router } from "express";
 import { reviewService } from "../services/reviewService.ts";
 
 
@@ -12,6 +12,7 @@ router.post('/code-review', async (req, res) => {
     try {        
         const result = await reviewService(code);
         res.json({ result: result });
+        
     } catch (error) {
         res.status(500).json({ error: 'Failed to review code' });
     }

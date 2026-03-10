@@ -13,5 +13,5 @@ export const reviewSchema = z.object({
     z.string().describe("Suggestions to improve the code")
   ),
 
-  score: z.number().min(0).max(10).describe("Overall code quality score")
+//   score: z.number().min(0).max(10).describe("Overall code quality score") I will calculate this score based on the issues detected, so no need for the model to return it it is determined by the reviewService
 });
