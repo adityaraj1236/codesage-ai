@@ -1,14 +1,15 @@
 import {reviewChain} from "../llm/reviewChain.ts"
 
 
-function calculateScore(issues: {severity: "low" | "medium" | "high"}[]) {
-  let score = 10;
-  issues.forEach(issue => {
-    if (issue.severity === "high") score -= 3;
-    if (issue.severity === "medium") score -= 2;
-    if (issue.severity === "low") score -= 1;
-  });
-  return Math.max(0, score);
+function calculateScore(issues: { severity: "low" | "medium" | "high" }[]) {
+  const deductions = issues.reduce((acc, issue) => {
+    if (issue.severity === "high") return acc + 3;
+    if (issue.severity === "medium") return acc + 2;
+    return acc + 1;
+  }, 0);
+
+  const score = 10 - deductions;
+  return Math.max(0, Math.min(10, score));
 }
 
 export const reviewService = async (code: string) => {

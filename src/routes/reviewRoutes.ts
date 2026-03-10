@@ -1,10 +1,8 @@
 import { response, Router } from "express";
 import { reviewService } from "../services/reviewService.ts";
-
-
-
+import { promptInjectionMiddleware } from "../middlewares/promptInjectionMiddleware.ts";
 const router = Router();
-router.post('/code-review', async (req, res) => {
+router.post('/code-review', promptInjectionMiddleware , async (req, res) => {
     const { code } = req.body;
     if (!code) {
         return res.status(400).json({ error: 'Code is required' });

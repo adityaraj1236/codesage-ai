@@ -8,10 +8,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const model = new ChatGoogle({
-    apiKey: env.GOOGLE_API_KEY,
-    model: "gemini-2.0-flash",
-});
 app.get('/health-check', (req: express.Request, res: express.Response) => {
     res.json({ status: 'OK' });
 });
